@@ -1,0 +1,8 @@
+CREATE TABLE `student` (
+  `SNO` varchar(20) NOT NULL,
+  `SNAME` varchar(11) NOT NULL,
+  `SSEX` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO STUDENT VALUES ('001', 'KangKang', 'M ');
+INSERT INTO STUDENT VALUES ('002', 'Mike', 'M ');
+INSERT INTO STUDENT VALUES ('003', 'Jane', 'F ');
