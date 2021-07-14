@@ -14,6 +14,11 @@ public class DemoApplication {
 		return "hello spring boot";
 	}
 
+	@RequestMapping("/hello")
+	String hello(){
+		return "hello world";
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}

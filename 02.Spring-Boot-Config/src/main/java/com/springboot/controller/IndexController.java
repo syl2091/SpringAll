@@ -12,7 +12,7 @@ import com.springboot.bean.TestConfigBean;
 @RestController
 public class IndexController {
 	@Autowired
-	private BlogProperties blogProperties;
+		private BlogProperties blogProperties;
 	@Autowired
 	private ConfigBean configBean;
 	@Autowired
