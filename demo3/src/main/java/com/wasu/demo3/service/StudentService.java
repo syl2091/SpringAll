@@ -7,7 +7,7 @@ public interface StudentService {
 
     int update(Student student);
 
-    int deleteBySno(Student student);
+    int deleteBySno(String sno);
 
     Student queryStudentBySno(String sno);
 }

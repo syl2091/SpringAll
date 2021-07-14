@@ -13,6 +13,16 @@ public class Student implements Serializable {
     private String name;
     private String sex;
 
+    public Student() {
+
+    }
+
+    public Student(String sno, String name, String sex) {
+        this.sno = sno;
+        this.name = name;
+        this.sex = sex;
+    }
+
     public String getSno() {
         return sno;
     }

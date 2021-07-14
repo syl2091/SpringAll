@@ -25,4 +25,28 @@ public class TestController {
         Student student = studentService.queryStudentBySno(sno);
         return student.getName()+":"+student.getSex()+":"+student.getSno();
     }
+
+    @RequestMapping(value = "/addstudent/{sno}/{name}/{sex}",method = RequestMethod.GET)
+    public String addStudent(@PathVariable String sno, @PathVariable String name, @PathVariable String sex){
+        Student student = new Student(sno,name,sex);
+        try {
+            studentService.add(student);
+            return "成功";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "失败";
+    }
+
+    @RequestMapping(value = "/delStudent/{sno}",method = RequestMethod.GET)
+    public String delStudent(@PathVariable String sno){
+        try {
+            studentService.deleteBySno(sno);
+            return "成功";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "失败";
+    }
+
 }

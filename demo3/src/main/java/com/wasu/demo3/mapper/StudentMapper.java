@@ -20,7 +20,7 @@ public interface StudentMapper {
     int update(Student student);
 
     @Delete("delete from student where sno=#{sno}")
-    int deleteBySno(Student student);
+    int deleteBySno(String sno);
 
     @Select("select * from student where sno=#{sno}")
     @Results(id = "student", value = {
