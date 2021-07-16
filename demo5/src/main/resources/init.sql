@@ -1,0 +1,12 @@
+CREATE TABLE `sys_log` (
+  `ID` varchar(50) NOT NULL,
+  `USERNAME` varchar(50) DEFAULT NULL,
+  `OPERATION` varchar(50) DEFAULT NULL,
+  `TIME` int(20) DEFAULT NULL,
+  `METHOD` varchar(50) DEFAULT NULL,
+  `PARAMS` varchar(200) DEFAULT NULL,
+  `IP` varchar(64) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
