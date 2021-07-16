@@ -1,0 +1,11 @@
+# 应用名称
+server:
+  servlet:
+    context-path: /
+  port: 8080
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    cache: true
