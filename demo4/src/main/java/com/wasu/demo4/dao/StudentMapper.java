@@ -1,6 +1,8 @@
 package com.wasu.demo4.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName:StudentDao
@@ -9,5 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Date: 2021/7/15 17:15
  */
 @Mapper
-public class StudentMapper {
+public interface StudentMapper {
+    List<Map<String,Object>> getAllStudents();
 }
