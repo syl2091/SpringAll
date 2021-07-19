@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: demo8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  type-aliases-package: com.wasu.demo8.entity
+
+
+logging:
+  level:
+    com:
+      wasu:
+        demo8:
+          mapper: debug
