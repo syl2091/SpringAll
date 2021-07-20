@@ -41,3 +41,33 @@ spring.thymeleaf.prefix=classpath:/templates/
 # 在构建 URL 时添加到视图名称后的后缀（默认值： .html ）
 spring.thymeleaf.suffix=.html
 
+# Shiro 注解
+// 表示当前Subject已经通过login进行了身份验证；即Subject.isAuthenticated()返回true。
+@RequiresAuthentication  
+ 
+// 表示当前Subject已经身份验证或者通过记住我登录的。
+@RequiresUser  
+
+// 表示当前Subject没有身份验证或通过记住我登录过，即是游客身份。
+@RequiresGuest  
+
+// 表示当前Subject需要角色admin和user。  
+@RequiresRoles(value={"admin", "user"}, logical= Logical.AND)  
+
+// 表示当前Subject需要权限user:a或user:b。
+@RequiresPermissions (value={"user:a", "user:b"}, logical= Logical.OR)
+
+# 问题记录
+注解没有生效  
+原因:aop 没有生效
+在shiroconfig中加入
+
+```java
+    @Bean
+    @ConditionalOnMissingBean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+        defaultAAP.setProxyTargetClass(true);
+        return defaultAAP;
+    }
+```

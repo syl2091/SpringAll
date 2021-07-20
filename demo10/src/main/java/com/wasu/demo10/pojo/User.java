@@ -12,17 +12,17 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
     private String userName;
     private String password;
     private Date createTime;
     private String status;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

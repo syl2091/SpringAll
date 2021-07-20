@@ -10,15 +10,15 @@ import java.io.Serializable;
  */
 public class Permission implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer id;
+    private String id;
     private String url;
     private String name;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
