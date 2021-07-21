@@ -49,6 +49,19 @@
             <artifactId>shiro-redis</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- shiro ehcache -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+        <!-- ehcache -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>
@@ -112,3 +125,4 @@
     </build>
 
 </project>
+

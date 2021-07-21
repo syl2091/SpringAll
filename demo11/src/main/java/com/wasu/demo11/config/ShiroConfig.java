@@ -1,6 +1,7 @@
 package com.wasu.demo11.config;
 
 import com.wasu.demo11.shiro.ShiroRealm;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -51,10 +52,22 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
         securityManager.setRememberMeManager(rememberMeManager());
-        securityManager.setCacheManager(redisCacheManager());
+        //redis
+        //securityManager.setCacheManager(redisCacheManager());
+
+        //Ehcache
+        securityManager.setCacheManager(ehCacheManager());
+
         return securityManager;
     }
 
+
+    @Bean
+    public EhCacheManager ehCacheManager(){
+        EhCacheManager ehCacheManager = new EhCacheManager();
+        ehCacheManager.setCacheManagerConfigFile("classpath:config/shiro-ehcache.xml");
+        return ehCacheManager;
+    }
     /**
      * redis
      * @return
