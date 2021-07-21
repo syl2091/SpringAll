@@ -1,5 +1,6 @@
 package com.wasu.demo11.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.wasu.demo11.shiro.ShiroRealm;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -62,6 +63,11 @@ public class ShiroConfig {
     }
 
 
+    @Bean
+    public ShiroDialect shiroDialect(){
+        ShiroDialect shiroDialect = new ShiroDialect();
+        return shiroDialect;
+    }
     @Bean
     public EhCacheManager ehCacheManager(){
         EhCacheManager ehCacheManager = new EhCacheManager();
