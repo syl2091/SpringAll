@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo15
+  mail:
+    host: mail.wasu.com
+    username: shenyongl@wasu.com
+    password: syl2091...
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
