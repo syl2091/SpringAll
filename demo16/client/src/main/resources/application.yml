@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: client
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080/admin-server/
+        instance:
+          name: 8081
+server:
+  port: 8081
+
+
