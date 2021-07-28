@@ -12,6 +12,7 @@ spring:
     password: root
 
 mybatis:
+  type-aliases-package: com.wasu.demo20.bean
   mapper-locations: classpath:mapper/*.xml
 
 
