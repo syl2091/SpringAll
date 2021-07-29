@@ -1,6 +1,7 @@
 spring:
   application:
     name: eureka-server
+
 server:
   port: 8080
 
@@ -13,3 +14,10 @@ eureka:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: syl
+    password: 123456
