@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -75,7 +76,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.wasu.eurekaclient.EurekaClientApplication</mainClass>
+                    <mainClass>com.wasu.demo21.EurekaClientApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
