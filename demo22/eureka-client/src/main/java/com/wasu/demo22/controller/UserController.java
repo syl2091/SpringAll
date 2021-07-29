@@ -1,0 +1,53 @@
+package com.wasu.demo22.controller;
+
+import com.wasu.demo22.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * @ClassName:UserController
+ * @Description: TODO
+ * @Author: Syl
+ * @Date: 2021/7/29 16:55
+ */
+@RestController
+@RequestMapping("/user")
+public class UserController {
+    private Logger log = LoggerFactory.getLogger(getClass());
+
+    @GetMapping("/{id}")
+    public User get(@PathVariable Long id) {
+        log.info("获取用户id为 " + id + "的信息");
+        return new User(id, "mrbird", "123456");
+    }
+
+    @GetMapping("/getAll")
+    public List<User> get() {
+        List<User> list = new ArrayList<>();
+        list.add(new User(1L, "mrbird", "123456"));
+        list.add(new User(2L, "scott", "123456"));
+        log.info("获取用户信息 " + list);
+        return list;
+    }
+
+    @PostMapping("/add")
+    public void add(@RequestBody User user) {
+        log.info("新增用户成功 " + user);
+    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody User user) {
+        log.info("更新用户成功 " + user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        log.info("删除用户成功 " + id);
+    }
+
+}

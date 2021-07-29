@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Server-Provider
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://syl:123456@localhost:8080/eureka/
+  server:
+    enable-self-preservation: fasle
