@@ -1,7 +1,7 @@
 package com.wasu.demo20.mapper;
 
 import com.wasu.demo20.bean.User;
-import com.wasu.demo20.config.MyMapper;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface UserMapper extends MyMapper<User> {
+public interface UserMapper extends Mapper<User> {
 }

@@ -1,8 +1,13 @@
 package com.wasu.demo20.service.impl;
 
 import com.wasu.demo20.bean.User;
+import com.wasu.demo20.mapper.UserMapper;
 import com.wasu.demo20.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.spring.annotation.MapperScan;
+
+import java.util.List;
 
 /**
  * @ClassName:UserServiceImpl
@@ -11,5 +16,12 @@ import org.springframework.stereotype.Service;
  * @Date: 2021/7/28 16:03
  */
 @Service
-public class UserServiceImpl extends BaseService<User> implements UserService {
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserMapper userMapper;
+    @Override
+    public List<User> selectAll() {
+        return userMapper.selectAll();
+    }
 }

@@ -2,6 +2,8 @@ package com.wasu.demo20.service;
 
 import com.wasu.demo20.bean.User;
 
+import java.util.List;
+
 
 /**
  * @ClassName:UserService
@@ -9,5 +11,6 @@ import com.wasu.demo20.bean.User;
  * @Author: Syl
  * @Date: 2021/7/28 16:01
  */
-public interface UserService extends IService<User> {
+public interface UserService {
+    List<User> selectAll();
 }

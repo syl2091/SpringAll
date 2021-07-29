@@ -7,7 +7,7 @@ spring:
     name: demo20
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blue?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
     username: root
     password: root
 
@@ -18,12 +18,20 @@ mybatis:
 
 #mappers 多个接口时逗号隔开
 mapper:
-  mappers: com.wasu.demo20.config.MyMapper
-  not-empty: false
-  identity: mysql
+  mappers: com.wasu.demo20.mapper
+  not-empty: true
+  identity: MYSQL
 
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+logging:
+  level:
+    com:
+      wasu:
+        demo20:
+          mapper: debug
