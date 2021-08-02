@@ -7,4 +7,5 @@ server:
 
 eureka:
   client:
-    service-url: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
+    service-url:
+      defaultZone: http://syl:123456@localhost:8080/eureka/,http://syl:123456@localhost:8081/eureka/
