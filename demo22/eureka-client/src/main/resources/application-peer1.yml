@@ -10,6 +10,6 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
+      defaultZone: http://peer2:123456@peer2:8081/eureka/http://syl:123456@localhost:peer1/eureka/
   server:
     enable-self-preservation: fasle

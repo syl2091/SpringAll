@@ -3,13 +3,13 @@ spring:
     name: Server-Provider
 
 server:
-  port: 8081
+  port: 8082
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://syl:123456@localhost:8080/eureka/
+      defaultZone: http://syl:123456@peer1:8080/eureka/
   server:
     enable-self-preservation: fasle
