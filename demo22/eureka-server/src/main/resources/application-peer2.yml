@@ -14,5 +14,8 @@ eureka:
     hostname: peer2
   client:
     service-url:
-      defaultZone: http://syl:123456@peer1:8080/eureka/
-
+      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    enable-self-preservation: false
