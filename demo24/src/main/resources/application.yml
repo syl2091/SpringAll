@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Turbine
+
+server:
+  port: 9003
+eureka:
+  client:
+    service-url:
+      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
+turbine:
+  app-config: eureka-consumer
+  combine-host-port: true
+  cluster-name-expression: new String('default')
+
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
