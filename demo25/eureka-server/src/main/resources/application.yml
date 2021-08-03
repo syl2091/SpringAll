@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Eureka-Server
+  security:
+    user:
+      name: syl
+      password: 123456
+
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    register-with-eureka: false #是否将自己注册到注册中心上
+    fetch-registry: false #是否从Eureka上获取注册信息
+    service-url:
+      defaultZone: http://syl:123456@peer2:8081/eureka/
+  server:
+    enable-self-preservation: false
+
