@@ -3,12 +3,12 @@ spring:
     name: eureka-consumer
 
 server:
-  port: 9000
+  port: 9001
 
 eureka:
   client:
     service-url:
-      defaultZone: http://syl:123456@peer1:8080/eureka/
+      defaultZone: http://syl:123456@peer2:8081/eureka/
     fetch-registry: true
     register-with-eureka: true
 
