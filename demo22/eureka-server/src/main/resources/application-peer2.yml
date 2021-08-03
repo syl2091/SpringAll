@@ -6,16 +6,15 @@ spring:
     name: Eureka-Server
   security:
     user:
-      name: syl
       password: 123456
-
+      name: syl
 eureka:
   instance:
     hostname: peer2
   client:
     service-url:
-      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+      defaultZone: http://syl:123456@peer1:8080/eureka/
+    register-with-eureka: false
+    fetch-registry: false
   server:
     enable-self-preservation: false

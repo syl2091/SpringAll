@@ -8,4 +8,6 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://syl:123456@localhost:8080/eureka/,http://syl:123456@localhost:8081/eureka/
+      defaultZone: http://syl:123456@peer1:8080/eureka/
+    fetch-registry: true
+    register-with-eureka: true
