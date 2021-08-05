@@ -12,23 +12,32 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @ClassName:WebSecurityConfig
- * @Description: TODO
+ * @Description: 适配器
  * @Author: Syl
  * @Date: 2021/8/4 9:24
  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    @Autowired
+    private MyUserDetailConfig myUserDetailConfig;
+    @Autowired
+    private DataSource dataSource;
     @Autowired
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
     @Autowired
     private ValidateCodeFilter validateCodeFilter;
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加验证码校验过滤器
@@ -39,13 +48,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(myAuthenticationSuccessHandler)  //处理成功
                 .failureHandler(myAuthenticationFailureHandler)  //处理失败
                 .and()
+                .rememberMe()
+                .tokenRepository(persistentTokenRepository()) // 配置 token 持久化仓库
+                .tokenValiditySeconds(3600) // remember 过期时间，单为秒
+                .userDetailsService(myUserDetailConfig)//处理自动登录逻辑
+                .and()
                 .authorizeRequests() // 授权配置
-                .antMatchers("/login.html","/authentication/require","/code/image").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/login.html", "/authentication/require", "/code/image").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();
     }
 
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        jdbcTokenRepository.setCreateTableOnStartup(false);
+        return jdbcTokenRepository;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

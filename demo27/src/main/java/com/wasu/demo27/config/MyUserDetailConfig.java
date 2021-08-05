@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @ClassName:MyUserDetailConfig
- * @Description: TODO
+ * @Description: 登录逻辑处理类
  * @Author: Syl
  * @Date: 2021/8/4 9:34
  */
