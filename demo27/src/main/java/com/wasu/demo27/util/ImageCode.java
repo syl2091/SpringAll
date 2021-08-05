@@ -27,7 +27,7 @@ public class ImageCode {
         this.expireTime = expireTime;
     }
 
-    boolean isExpire() {
+    public boolean isExpire() {
         return LocalDateTime.now().isAfter(expireTime);
     }
 

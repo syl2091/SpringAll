@@ -1,5 +1,6 @@
 package com.wasu.demo27.config;
 
+import com.wasu.demo27.filter.ValidateCodeFilter;
 import com.wasu.demo27.handler.MyAuthenticationFailureHandler;
 import com.wasu.demo27.handler.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @ClassName:WebSecurityConfig
@@ -24,10 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
     @Autowired
-    MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin() // 表单登录
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加验证码校验过滤器
+                .formLogin() // 表单登录
                 // http.httpBasic() // HTTP Basic
                 .loginPage("/authentication/require") // 登录跳转 URL
                 .loginProcessingUrl("/login") // 处理表单登录 URL
