@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(myUserDetailConfig)//处理自动登录逻辑
                 .and()
                 .authorizeRequests() // 授权配置
-                .antMatchers("/login.html", "/authentication/require", "/code/image").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/login.html", "/authentication/require", "/code/image","/code/sms").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();
