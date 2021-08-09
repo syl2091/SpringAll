@@ -32,8 +32,10 @@ public class MyUserDetailConfig implements UserDetailsService {
         MyUser user = new MyUser();
         user.setUserName(username);
         user.setPassword(passwordEncoder.encode("123456"));
-        logger.info("加密后的密码:"+user.getPassword());
-        return new User(username,user.getPassword(),user.isEnabled(),user.isAccountNonExpired(),user.isCredentialsNonExpired()
-        ,user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        logger.info("加密后的密码:" + user.getPassword());
+        return new User(username, user.getPassword(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired()
+                , user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
+
+
 }

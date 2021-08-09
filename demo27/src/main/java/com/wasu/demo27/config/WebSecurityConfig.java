@@ -1,6 +1,7 @@
 package com.wasu.demo27.config;
 
 import com.wasu.demo27.filter.ValidateCodeFilter;
+import com.wasu.demo27.filter.sms.SmsCodeFilter;
 import com.wasu.demo27.handler.MyAuthenticationFailureHandler;
 import com.wasu.demo27.handler.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
     @Autowired
     private ValidateCodeFilter validateCodeFilter;
+    @Autowired
+    private SmsAuthenticationConfig smsAuthenticationConfig;
+    @Autowired
+    private SmsCodeFilter smsCodeFilter;
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加验证码校验过滤器
+                .addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)//添加短信验证码校验过滤器
                 .formLogin() // 表单登录
                 // http.httpBasic() // HTTP Basic
                 .loginPage("/authentication/require") // 登录跳转 URL
@@ -57,7 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.html", "/authentication/require", "/code/image","/code/sms").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
-                .and().csrf().disable();
+                .and().csrf().disable()
+                .apply(smsAuthenticationConfig); // 将短信验证码认证配置加到 Spring Security 中
     }
 
     @Bean
