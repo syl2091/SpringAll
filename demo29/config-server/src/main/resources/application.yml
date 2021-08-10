@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/onthroad/spring-cloud-config
+          username: 17719446375
+          password: syl2091...
+
+server:
+  port: 12580
