@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Server-Provider
+
+server:
+  port: 8085
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://peer1:8083/eureka/,http://peer2:8084/eureka/
+  server:
+    enable-self-preservation: fasle
