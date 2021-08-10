@@ -1,0 +1,18 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://peer1:8083/eureka/
+  instance:
+    hostname: peer2
+
+  server:
+    enable-self-preservation: false
