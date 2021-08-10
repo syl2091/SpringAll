@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: Zuul-Gateway
+server:
+  port: 12580
+
+
+zuul:
+  prefix: /gateway #前缀配置
+  routes:
+    server-consumer:
+      path: /server-consumer/**
+      serviceId: feign-consumer
+    api-e:
+      path: /api-e/**
+      url: forward:/test
+eureka:
+  instance:
+    hostname: Zuul-Gateway
+  client:
+    service-url:
+      defaultZone: http://peer1:8083/eureka/,http://peer2:8084/eureka/
+
+
+
