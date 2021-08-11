@@ -10,5 +10,11 @@ spring:
       profile: dev
       label: master
       name: febs
+      username: syl
+      password: 123456
+  security:
+    user:
+      name: syl
+      password: 123456
 
 
