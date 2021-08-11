@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Eureka-Server
+  security:
+    user:
+      name: syl
+      password: 123456
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@localhost:8081/eureka/
+  server:
+    enable-self-preservation: false
