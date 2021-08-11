@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: server-provider2
+  zipkin:
+    base-url: http://localhost:9411/
+
+server:
+  port: 9001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
