@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 12581
 
 spring:
   application:
@@ -16,5 +16,13 @@ spring:
     user:
       name: syl
       password: 123456
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5762
 
-
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://syl:123456@peer1:8080/eureka/,http://syl:123456@peer2:8081/eureka/
