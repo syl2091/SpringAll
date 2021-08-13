@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: demo36
+  thymeleaf:
+    cache: true
+
+server:
+  port: 8080
