@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: demo39
+
+
+server:
+  port: 8080
