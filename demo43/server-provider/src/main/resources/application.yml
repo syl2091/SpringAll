@@ -1,0 +1,16 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: server-provider
+
+  cloud:
+    consu
+      host: 192.168.174.134
+      port: 8500
+      discovery:
+        health-check-interval: 10s  # 健康检查周期为10s
+        service-name: ${spring.application.name}
+        register-health-check: true
+        health-check-path: /check # 健康检查路劲
+        # spring.cloud.consul.discovery.health-check-path的默认值为/actuator/health  使用默认值还需导入spring-boot-starter-actuator依赖。
