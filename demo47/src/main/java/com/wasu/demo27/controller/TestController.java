@@ -1,6 +1,7 @@
 package com.wasu.demo27.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,14 @@ public class TestController {
         return "session已失效，请重新认证";
     }
 
+    @GetMapping("/signout/success")
+    public String signout() {
+        return "退出成功，请重新登录";
+    }
 
+    @GetMapping("/auth/admin")
+    @PreAuthorize("hasAuthority('admin')")
+    public String authenticationTest() {
+        return "您拥有admin权限，可以查看";
+    }
 }

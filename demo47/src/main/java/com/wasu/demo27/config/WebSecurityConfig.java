@@ -2,12 +2,14 @@ package com.wasu.demo27.config;
 
 import com.wasu.demo27.filter.ValidateCodeFilter;
 import com.wasu.demo27.filter.sms.SmsCodeFilter;
+import com.wasu.demo27.handler.MyAuthenticationAccessDeniedHandler;
 import com.wasu.demo27.handler.MyAuthenticationFailureHandler;
 import com.wasu.demo27.handler.MyAuthenticationSuccessHandler;
 import com.wasu.demo27.strategy.MySessionExpiredStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,7 +28,7 @@ import javax.sql.DataSource;
  * @Date: 2021/8/4 9:24
  */
 @Configuration
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailConfig myUserDetailConfig;
@@ -44,11 +46,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private SmsCodeFilter smsCodeFilter;
     @Autowired
     private MySessionExpiredStrategy sessionExpiredStrategy;
+    @Autowired
+    private MyAuthenticationAccessDeniedHandler authenticationAccessDeniedHandler;
+
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加验证码校验过滤器
+        http.exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler).and() //权限认证
+                .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加验证码校验过滤器
                 .addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)//添加短信验证码校验过滤器
                 .formLogin() // 表单登录
                 // http.httpBasic() // HTTP Basic
@@ -63,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(myUserDetailConfig)//处理自动登录逻辑
                 .and()
                 .authorizeRequests() // 授权配置
-                .antMatchers("/login.html", "/authentication/require", "/code/image","/code/sms").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/login.html", "/authentication/require", "/code/image","/code/sms","/signout/success").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and()
@@ -73,7 +79,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(true) //session到达最大值阻止登录
                 .expiredSessionStrategy(sessionExpiredStrategy)
                 .and()
-                .and().csrf().disable()
+                .and()
+                .logout()
+                .logoutUrl("/signout")   //自定义退出登录行为
+                .logoutSuccessUrl("/signout/success")
+                .deleteCookies("JSESSIONID")
+                .and()
+                .csrf().disable()
                 .apply(smsAuthenticationConfig); // 将短信验证码认证配置加到 Spring Security 中
     }
 
