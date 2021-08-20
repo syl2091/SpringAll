@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo27
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  redis:
+    host: localhost
+    port: 6379
+  session:
+    timeout: 3600 # session的最小有效期为60秒，也就是说即使你设置为小于60秒的值，其有效期还是为60秒
+    store-type: REDIS
+
+
+server:
+  port: 8080
+
