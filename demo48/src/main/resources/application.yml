@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: demo48
+security:
+  oauth2:
+    client:
+      client-id: test
+      client-secret: test1234
+      registered-redirect-uri: http://mrbird.cc
+
+
+server:
+  port: 8080
