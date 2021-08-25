@@ -29,7 +29,7 @@ public class UserDetailService implements UserDetailsService {
 
         return new User(username, user.getPassword(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("user:add"));
+                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("user:add,user:update"));
 
     }
 }

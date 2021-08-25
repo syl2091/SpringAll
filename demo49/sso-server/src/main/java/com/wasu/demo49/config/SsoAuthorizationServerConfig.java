@@ -49,6 +49,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
                 .authorizedGrantTypes("refresh_token","authorization_code")
                 .accessTokenValiditySeconds(3600)
                 .scopes("all")
+                .autoApprove(true)
                 .redirectUris("http://127.0.0.1:9090/app1/login")
                 .and()
                 .withClient("app-b")
@@ -56,6 +57,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
                 .authorizedGrantTypes("refresh_token","authorization_code")
                 .accessTokenValiditySeconds(7200)
                 .scopes("all")
+                .autoApprove(true)
                 .redirectUris("http://127.0.0.1:9091/app2/login");
     }
 
