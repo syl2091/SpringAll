@@ -1,12 +1,12 @@
 package com.wasu.demo48.handler;
 
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -30,35 +30,43 @@ import java.util.HashMap;
  */
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 1. 从请求头中获取 ClientId
-        String header = httpServletRequest.getHeader("Authorization");
+        String header = request.getHeader("Authorization");
         if (header == null || !header.startsWith("Basic ")) {
             throw new UnapprovedClientAuthenticationException("请求头中无client信息");
         }
-        String[] tokens = this.extractAndDecodeHeader(header, httpServletRequest);
+
+        String[] tokens = this.extractAndDecodeHeader(header, request);
         String clientId = tokens[0];
         String clientSecret = tokens[1];
 
         TokenRequest tokenRequest = null;
+
         // 2. 通过 ClientDetailsService 获取 ClientDetails
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
+
         // 3. 校验 ClientId和 ClientSecret的正确性
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId:" + clientId + "对应的信息不存在");
-        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
+        } else if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("clientSecret不正确");
         } else {
             // 4. 通过 TokenRequest构造器生成 TokenRequest
             tokenRequest = new TokenRequest(new HashMap<>(), clientId, clientDetails.getScope(), "custom");
         }
+
         // 5. 通过 TokenRequest的 createOAuth2Request方法获取 OAuth2Request
         OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
         // 6. 通过 Authentication和 OAuth2Request构造出 OAuth2Authentication
@@ -69,8 +77,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
         // 8. 返回 Token
         log.info("登录成功");
-        httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(token));
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(new ObjectMapper().writeValueAsString(token));
     }
 
     private String[] extractAndDecodeHeader(String header, HttpServletRequest request) {

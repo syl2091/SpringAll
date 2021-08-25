@@ -1,5 +1,5 @@
 # 工程简介
-Spring Security OAuth2入门  自定义token验证方式
+Spring Security OAuth2入门  自定义token验证方式   自定义令牌配置jwt
 
 
 # 延伸阅读

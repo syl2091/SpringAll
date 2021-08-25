@@ -30,6 +30,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             .and()
                 .authorizeRequests()//授权配置
                 .antMatchers("/code/sms").permitAll()
+                .antMatchers("/oauth/token").permitAll()
                 .anyRequest()//任何请求
                 .authenticated()//都需要认证
             .and()
