@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: demo50
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springbatch?serverTimezone=UTC
+    username: root
+    password: root
