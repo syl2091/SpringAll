@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: demo54
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springbatch?serverTimezone=UTC
+    username: root
+    password: root
+  batch:
+    job:
+      enabled: false # 关闭Spring Batch启动项目自动运行任务的机制
